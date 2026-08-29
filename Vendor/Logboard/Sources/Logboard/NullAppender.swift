@@ -1,7 +1,7 @@
 import Foundation
 
 /// The NullAppender class does output no message.
-public class NullAppender: LBLoggerAppender {
+public final class NullAppender: LBLoggerAppender, @unchecked Sendable {
     public static let shared = NullAppender()
 
     public func append(_ logboard: LBLogger, level: LBLogger.Level, message: [Any], file: StaticString, function: StaticString, line: Int) {
