@@ -1,0 +1,37 @@
+name: Build iOS XCFrameworks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build device XCFrameworks
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          for scheme in Logboard HaishinKit RTMPHaishinKit; do
+            derived_data="$PWD/build/$scheme"
+            xcodebuild \
+              -scheme "$scheme" \
+              -configuration Release \
+              -destination "generic/platform=iOS" \
+              -derivedDataPath "$derived_data" \
+              BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+              SKIP_INSTALL=NO \
+              build
+            framework_path="$(find "$derived_data" -type d -name "$scheme.framework" -path "*Release-iphoneos*" -print -quit)"
+            test -n "$framework_path"
+            xcodebuild -create-xcframework \
+              -framework "$framework_path" \
+              -output "artifacts/$scheme.xcframework"
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: haishinkit-ios-xcframeworks
+          path: artifacts

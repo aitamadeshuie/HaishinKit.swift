@@ -23,8 +23,9 @@ let package = Package(
         .visionOS(.v1)
     ],
     products: [
-        .library(name: "HaishinKit", targets: ["HaishinKit"]),
-        .library(name: "RTMPHaishinKit", targets: ["RTMPHaishinKit"]),
+        .library(name: "Logboard", type: .dynamic, targets: ["Logboard"]),
+        .library(name: "HaishinKit", type: .dynamic, targets: ["HaishinKit"]),
+        .library(name: "RTMPHaishinKit", type: .dynamic, targets: ["RTMPHaishinKit"]),
         .library(name: "SRTHaishinKit", targets: ["SRTHaishinKit"]),
         .library(name: "MoQTHaishinKit", targets: ["MoQTHaishinKit"]),
         .library(name: "RTCHaishinKit", targets: ["RTCHaishinKit"])
