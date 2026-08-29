@@ -23,7 +23,6 @@ let package = Package(
         .visionOS(.v1)
     ],
     products: [
-        .library(name: "HBuilderXHaishinKit", targets: ["HBuilderXHaishinKit"]),
         .library(name: "HaishinKit", targets: ["HaishinKit"]),
         .library(name: "RTMPHaishinKit", targets: ["RTMPHaishinKit"]),
         .library(name: "SRTHaishinKit", targets: ["SRTHaishinKit"]),
@@ -34,11 +33,6 @@ let package = Package(
         .target(
             name: "Logboard",
             path: "Vendor/Logboard/Sources/Logboard"
-        ),
-        .target(
-            name: "HBuilderXHaishinKit",
-            dependencies: ["HaishinKit", "RTMPHaishinKit"],
-            path: "HBuilderXHaishinKit/Sources"
         ),
         .binaryTarget(
             name: "libsrt",
