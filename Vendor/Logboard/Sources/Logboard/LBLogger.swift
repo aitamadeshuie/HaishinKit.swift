@@ -7,7 +7,7 @@ func filename(_ file: String) -> String {
 /// The LBLogger class is writing string messages to the LogboardAppender.
 public class LBLogger {
     /// The  default dateFormatter values that is yyyy-dd-MM HH:mm:ss.SSS.
-    static public var dateFormatter: DateFormatter = {
+    nonisolated(unsafe) static public var dateFormatter: DateFormatter = {
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-dd-MM HH:mm:ss.SSS"
         return dateFormatter
@@ -61,7 +61,7 @@ public class LBLogger {
         }
     }
 
-    private static var instances: [String: LBLogger] = [:]
+    nonisolated(unsafe) private static var instances: [String: LBLogger] = [:]
 
     /// Create or get a Logboard instance.
     public static func with(_ identifier: String) -> LBLogger {
